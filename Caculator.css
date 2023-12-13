@@ -1,0 +1,19 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: inline;
+    background-color: bisque;
+}
+h1 {
+    margin-left: 20px;
+}
+#text {
+    background-color: white;
+    border: solid 2px black;
+    height: 20px;
+    width: 183px;
+}
+button {
+    height: 40px;
+    width: 40px;
+    margin: 2px;
+}
