@@ -1,5 +1,34 @@
+function numberFinder(string, start, numToAdd) {
+    end = start
+    
+    while (end+numToAdd >= 0 && end+numToAdd !== string.length && ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"].includes(string[end+numToAdd])) {
+        end += numToAdd
+        window.prompt(end)
+    }
+    
+    if (numToAdd === -1) {
+        return [Number(string.slice(end, start+1)), end]
+    }
+    return [Number(string.slice(start, end+1)), end]
+}
+
+function simpleCalc(string, symbol) {
+    while (string.includes(symbol)) {
+        let index = string.indexOf(symbol)
+        let [firstNum, firstIndex] = numberFinder(string, index-1, -1)
+        let [secondNum, secondIndex] = numberFinder(string, index+1, 1)
+        
+        if (symbol === "+") {
+           new_value = firstNum + secondNum 
+        } else if (symbol === "X") {
+           new_value = firstNum * secondNum 
+        }
+            
+            return string.slice(0, firstIndex) + new_value + string.slice(secondIndex+1)
+        }
+}
 // rename of calculator input
-text = document.getElementById('text')
+let text = document.getElementById('text')
 
 // adds event listeners to the numbers
 for (let i = 0; i<10; i++) {
@@ -9,7 +38,7 @@ for (let i = 0; i<10; i++) {
 }
 
 // adds event listeners to the symbols
-symbols = ["/", "x", "-", "+", ".", "(", ")"]
+const symbols = ["/", "x", "-", "+", ".", "(", ")"]
 symbols.forEach(symbol => {
     document.getElementById(symbol).addEventListener('click', () => {
         text.value += document.getElementById(symbol).innerText
@@ -26,16 +55,16 @@ text.addEventListener("input", () => {
 // actaul logic for calcuator like 1+1
 document.getElementById('=').addEventListener('click', () => {
     let string = text.value
-    let new_value = 0
     try {
-        window.prompt(string.slice(string.indexOf('+')-1, string.indexOf('+')+2))
-        while (string.includes("+")) {
-            window.prompt(string.slice(string.indexOf('+')-1, string.indexOf('+')+2))
-            
-            new_value = Number(string[string.indexOf('+')-1]) + Number(string[string.indexOf('+')+2])
-            
-            string = string.slice(0, string.indexOf('+')-2) + new_value + string.slice(string.indexOf('+')+3)
+
+        while (string.includes("X")) {
+            string = simpleCalc(string, "X")
         }
+        
+        while (string.includes("+")) {
+            string = simpleCalc(string, "+")
+        }
+        
     } catch(e) {
         text.value = e
     }
