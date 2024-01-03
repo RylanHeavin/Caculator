@@ -1,9 +1,8 @@
 function numberFinder(string, start, numToAdd) {
     end = start
     
-    while (end+numToAdd >= 0 && end+numToAdd !== string.length && ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"].includes(string[end+numToAdd])) {
+    while (end+numToAdd >= 0 && end+numToAdd !== string.length && ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."].includes(string[end+numToAdd])) {
         end += numToAdd
-        window.prompt(end)
     }
     
     if (numToAdd === -1) {
@@ -21,7 +20,11 @@ function simpleCalc(string, symbol) {
         if (symbol === "+") {
            new_value = firstNum + secondNum 
         } else if (symbol === "X") {
-           new_value = firstNum * secondNum 
+            new_value = firstNum * secondNum 
+        } else if (symbol === "/") { 
+           new_value = firstNum / secondNum 
+        } else if (symbol === "-") {  
+            new_value = firstNum - secondNum 
         }
             
             return string.slice(0, firstIndex) + new_value + string.slice(secondIndex+1)
@@ -57,6 +60,10 @@ document.getElementById('=').addEventListener('click', () => {
     let string = text.value
     try {
 
+        while (string.includes("/")) {
+            string = simpleCalc(string, "/")
+        }
+        
         while (string.includes("X")) {
             string = simpleCalc(string, "X")
         }
@@ -65,6 +72,10 @@ document.getElementById('=').addEventListener('click', () => {
             string = simpleCalc(string, "+")
         }
         
+        while (string.includes("-") && ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."].includes(string[string.indexOf("-")-1]) && string.indexOf("-")-1 !== -1) {
+            string = simpleCalc(string, "-")
+        }
+    
     } catch(e) {
         text.value = e
     }
