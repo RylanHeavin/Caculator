@@ -30,8 +30,26 @@ function simpleCalc(string, symbol) {
             return string.slice(0, firstIndex) + new_value + string.slice(secondIndex+1)
         }
 }
+function loopCalc(string) {
+    while (string.includes("X")) {
+        string = simpleCalc(string, "X")
+    }
+    
+    while (string.includes("/")) {
+        string = simpleCalc(string, "/")
+    }
+        
+    while (string.includes("+")) {
+        string = simpleCalc(string, "+")
+    }
+        
+    while (string.includes("-") && ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."].includes(string[string.indexOf("-")-1]) && string.indexOf("-")-1 !== -1) {
+        string = simpleCalc(string, "-")
+    }
+  
+}
 // rename of calculator input
-let text = document.getElementById('text')
+const text = document.getElementById('text')
 
 // adds event listeners to the numbers
 for (let i = 0; i<10; i++) {
@@ -48,6 +66,10 @@ symbols.forEach(symbol => {
 })
 })
 
+document.getElementById("^").addEventListener('click', () => {
+    
+})
+
 // checks if the input only holds the correct numbers or symbols
 text.addEventListener("input", () => {
     if (!(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "x", "-", "+", "."].includes(text.value[text.value.length-1]))) {
@@ -58,17 +80,19 @@ text.addEventListener("input", () => {
 // actaul logic for calcuator like 1+1
 document.getElementById('=').addEventListener('click', () => {
     let string = text.value
+    window.prompt(string)
     try {
+
+        while (string.includes("X")) {
+            string = simpleCalc(string, "X")
+        }
+        
 
         while (string.includes("/")) {
             string = simpleCalc(string, "/")
         }
         
-        while (string.includes("X")) {
-            string = simpleCalc(string, "X")
-        }
-        
-        while (string.includes("+")) {
+                while (string.includes("+")) {
             string = simpleCalc(string, "+")
         }
         
