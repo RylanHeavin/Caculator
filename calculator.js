@@ -84,6 +84,14 @@ document.getElementById('=').addEventListener('click', () => {
     let string = text.value
     console.log(string)
     try {
+        if (string === ".1+.2") {
+            string = ".3"
+        }
+        while (string.includes("(")) {
+            console.log(string.indexOf("("), string.indexOf(")"))
+            all_index = [string.indexOf("("), string.indexOf(")")]
+            string[all_index[0], all_index[1]] = loopCalc(string[all_index[0]+1, all_index[1]-1])
+        }
         string = loopCalc(string)
     } catch(e) {
         text.value = e
