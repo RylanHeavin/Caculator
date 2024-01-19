@@ -1,3 +1,4 @@
+// finds the numbers and their index
 function numberFinder(string, start, numToAdd) {
     end = start
     
@@ -11,6 +12,7 @@ function numberFinder(string, start, numToAdd) {
     return [Number(string.slice(start, end+1)), end]
 }
 
+// calculating simple operations
 function simpleCalc(string, symbol) {
     while (string.includes(symbol)) {
         let index = string.indexOf(symbol)
@@ -30,6 +32,8 @@ function simpleCalc(string, symbol) {
             return string.slice(0, firstIndex) + new_value + string.slice(secondIndex+1)
         }
 }
+
+// Loops over simpleCalc
 function loopCalc(string) {
     while (string.includes("X")) {
         string = simpleCalc(string, "X")
@@ -46,8 +50,10 @@ function loopCalc(string) {
     while (string.includes("-") && ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."].includes(string[string.indexOf("-")-1]) && string.indexOf("-")-1 !== -1) {
         string = simpleCalc(string, "-")
     }
+    return string
   
 }
+
 // rename of calculator input
 const text = document.getElementById('text')
 
@@ -80,26 +86,9 @@ text.addEventListener("input", () => {
 // actaul logic for calcuator like 1+1
 document.getElementById('=').addEventListener('click', () => {
     let string = text.value
-    window.prompt(string)
+    console.log(string)
     try {
-
-        while (string.includes("X")) {
-            string = simpleCalc(string, "X")
-        }
-        
-
-        while (string.includes("/")) {
-            string = simpleCalc(string, "/")
-        }
-        
-                while (string.includes("+")) {
-            string = simpleCalc(string, "+")
-        }
-        
-        while (string.includes("-") && ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."].includes(string[string.indexOf("-")-1]) && string.indexOf("-")-1 !== -1) {
-            string = simpleCalc(string, "-")
-        }
-    
+        string = loopCalc(string)
     } catch(e) {
         text.value = e
     }

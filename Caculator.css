@@ -24,6 +24,6 @@ button {
 .button-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    width: 200px;
+    justify-content: center;
+    width: 176px;
 }
