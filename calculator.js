@@ -61,6 +61,7 @@ const text = document.getElementById('text')
 for (let i = 0; i<10; i++) {
     document.getElementById(i.toString()).addEventListener('click', () => {
         text.value += document.getElementById(i.toString()).innerText
+        text.focus()
     })
 }
 
@@ -69,6 +70,7 @@ const symbols = ["/", "x", "-", "+", ".", "(", ")"]
 symbols.forEach(symbol => {
     document.getElementById(symbol).addEventListener('click', () => {
         text.value += document.getElementById(symbol).innerText
+        text.focus()
 })
 })
 
@@ -82,15 +84,16 @@ text.addEventListener("input", () => {
 // actaul logic for calcuator like 1+1
 document.getElementById('=').addEventListener('click', () => {
     let string = text.value
-    window(string)
     try {
         if (string === ".1+.2") {
             string = ".3"
         }
-        while (string.includes("(")) {
-            console.log(string.indexOf("("), string.indexOf(")"))
-            all_index = [string.indexOf("("), string.indexOf(")")]
-            string[all_index[0], all_index[1]] = loopCalc(string[all_index[0]+1, all_index[1]-1])
+        while (string.includes("(")) { 
+            all_index = [string.indexOf("("), string.indexOf(")")+1]
+            window.prompt(string.slice(all_index[0], all_index[1]))
+            
+            string.replace("5", "0")
+            string = string.replace(string.slice(all_index[0], all_index[1]), loopCalc(string.slice(all_index[0]+1, all_index[1]-1)))
         }
         string = loopCalc(string)
     } catch(e) {
