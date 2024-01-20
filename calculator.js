@@ -82,7 +82,7 @@ text.addEventListener("input", () => {
 // actaul logic for calcuator like 1+1
 document.getElementById('=').addEventListener('click', () => {
     let string = text.value
-    console.log(string)
+    window(string)
     try {
         if (string === ".1+.2") {
             string = ".3"
