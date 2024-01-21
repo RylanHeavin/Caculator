@@ -66,7 +66,7 @@ for (let i = 0; i<10; i++) {
 }
 
 // adds event listeners to the symbols
-const symbols = ["/", "x", "-", "+", ".", "(", ")"]
+const symbols = ["/", "X", "-", "+", ".", "(", ")"]
 symbols.forEach(symbol => {
     document.getElementById(symbol).addEventListener('click', () => {
         text.value += document.getElementById(symbol).innerText
