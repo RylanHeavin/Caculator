@@ -76,7 +76,7 @@ symbols.forEach(symbol => {
 
 // checks if the input only holds the correct numbers or symbols
 text.addEventListener("input", () => {
-    if (!(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "x", "-", "+", "."].includes(text.value[text.value.length-1]))) {
+    if (!(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "X", "-", "+", "."].includes(text.value[text.value.length-1]))) {
         text.value = text.value.slice(0, text.value.length-1)
     }
 })
